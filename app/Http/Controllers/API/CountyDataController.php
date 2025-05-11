@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
+
 
 use Illuminate\Http\Request;
 use App\Models\EnergyInstallation;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+
 
 class CountyDataController extends Controller
 {

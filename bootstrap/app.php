@@ -14,20 +14,21 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    // ->withMiddleware(function (Middleware $middleware) {
-    //     $middleware->statefulApi();
-    //     $middleware->api(append: [
-    //         \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
-    //         \Illuminate\Routing\Middleware\SubstituteBindings::class,
-    //     ]);
-    // })
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->alias([
+            'verified' => \App\Http\Middleware\EnsureEmailIsVerified::class,
+        ]);
+
         $middleware->web(append: [
             \Illuminate\Http\Middleware\HandleCors::class,
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+        ]);
+
+        $middleware->api(append: [
+            \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
-

@@ -11,10 +11,10 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \App\Http\Middleware\TrustProxies::class,
-        \Illuminate\Http\Middleware\HandleCors::class,
+        \Illuminate\Http\Middleware\HandleCors::class,  // CORS middleware for global requests
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
-        \Illuminate\Http\Middleware\TrimStrings::class,
+        \App\Http\Middleware\CustomTrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ];
 
